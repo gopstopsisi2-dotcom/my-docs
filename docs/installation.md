@@ -1,3 +1,22 @@
+# Руководство по установке
+
+## Системные требования
+
+| Компонент | Минимальные требования |
+|-----------|------------------------|
+| ОС | Windows 10 / macOS 11 / Ubuntu 20.04 |
+| RAM | 2 GB |
+| Диск | 500 MB свободного места |
+| Python | 3.8 или выше |
+
+## Установка из исходников
+
+```bash
+git clone https://github.com/gopstopsisi2-dotcom/my-docs.git
+cd my-docs
+pip install -r requirements.txt
+python setup.py install
+
 \# Установка программы
 
 
