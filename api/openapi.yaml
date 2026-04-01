@@ -103,7 +103,37 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/TaskInput'
+       /tasks/{id}:
+    delete:
+      summary: Удалить задачу по ID
+      description: Удаляет задачу из списка. Требуется авторизация.
+      operationId: deleteTask
+      tags:
+        - Tasks
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID задачи для удаления
+          schema:
+            type: integer
+            example: 1
       responses:
+        '204':
+          description: Задача успешно удалена (нет содержимого)
+        '401':
+          description: Не авторизован
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Задача с указанным ID не найдена
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+       responses:
         '201':
           description: Задача успешно создана
           content:
