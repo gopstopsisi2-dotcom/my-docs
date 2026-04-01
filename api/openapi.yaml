@@ -1,0 +1,122 @@
+openapi: 3.0.0
+info:
+  title: Task Manager API
+  description: API для управления списком задач (ToDo list)
+  version: 1.0.0
+  contact:
+    name: Поддержка
+    email: support@example.com
+
+servers:
+  - url: http://localhost:8080/api/v1
+    description: Локальный сервер разработки
+
+# Компоненты: схемы данных и безопасность
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
+      description: API ключ для авторизации
+
+  schemas:
+    Task:
+      type: object
+      required:
+        - id
+        - title
+      properties:
+        id:
+          type: integer
+          description: Уникальный идентификатор задачи
+          example: 1
+        title:
+          type: string
+          description: Название задачи
+          example: "Купить молоко"
+        completed:
+          type: boolean
+          description: Статус выполнения
+          example: false
+
+    TaskInput:
+      type: object
+      required:
+        - title
+      properties:
+        title:
+          type: string
+          description: Название новой задачи
+          example: "Сделать домашнее задание"
+
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+          example: 400
+        message:
+          type: string
+          example: "Некорректный запрос"
+
+# Безопасность применяется ко всем эндпоинтам
+security:
+  - ApiKeyAuth: []
+
+# Описание эндпоинтов
+paths:
+  /tasks:
+    get:
+      summary: Получить список всех задач
+      description: Возвращает массив всех задач пользователя
+      operationId: getTasks
+      tags:
+        - Tasks
+      responses:
+        '200':
+          description: Успешный ответ. Список задач.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Task'
+        '401':
+          description: Не авторизован. Неверный или отсутствует API ключ.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Внутренняя ошибка сервера
+
+    post:
+      summary: Создать новую задачу
+      description: Добавляет новую задачу в список
+      operationId: createTask
+      tags:
+        - Tasks
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TaskInput'
+      responses:
+        '201':
+          description: Задача успешно создана
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+        '400':
+          description: Некорректный запрос (например, отсутствует title)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Не авторизован
+        '422':
+          description: Ошибка валидации данных
