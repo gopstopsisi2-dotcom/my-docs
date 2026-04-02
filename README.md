@@ -1,4 +1,7 @@
 "# Моя документация" 
+[![CI/CD Status](https://github.com/gopstopsisi2-dotcom/my-docs/actions/workflows/docs.yml/badge.svg)](https://github.com/gopstopsisi2-dotcom/my-docs/actions/workflows/docs.yml)
+[![PR Checks](https://github.com/gopstopsisi2-dotcom/my-docs/actions/workflows/pr-checks.yml/badge.svg)](https://github.com/gopstopsisi2-dotcom/my-docs/actions/workflows/pr-checks.yml)
+[![OpenAPI Valid](https://img.shields.io/badge/OpenAPI-valid-brightgreen)](https://github.com/gopstopsisi2-dotcom/my-docs/blob/main/api/openapi.yaml)
 "" 
 "## Требования к системе" 
 "- Windows 10" 

@@ -1,13 +1,10 @@
-name: Deploy MkDocs to GitHub Pages
+name: Pull Request Checks
 
 on:
-  push:
+  pull_request:
     branches:
       - main
-  workflow_dispatch:
-
-permissions:
-  contents: write
+    types: [opened, synchronize, reopened]
 
 jobs:
   quality-checks:
@@ -40,19 +37,24 @@ jobs:
 
       - name: Lint Markdown files
         run: markdownlint docs/**/*.md README.md --config .markdownlint.json
+        continue-on-error: false
 
       - name: Check spelling
         run: cspell docs/**/*.md README.md --config .cspell.json
+        continue-on-error: false
 
       - name: Check broken links
         run: |
           find docs -name "*.md" -exec markdown-link-check {} \;
+        continue-on-error: false
 
       - name: Validate OpenAPI spec
         run: swagger-cli validate api/openapi.yaml
+        continue-on-error: false
 
       - name: Lint OpenAPI spec with Spectral
         run: spectral lint api/openapi.yaml
+        continue-on-error: false
 
       - name: Build MkDocs site
         run: mkdocs build
@@ -63,29 +65,3 @@ jobs:
           name: site
           path: site/
           retention-days: 7
-
-  deploy:
-    needs: quality-checks
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.9'
-
-      - name: Install dependencies
-        run: |
-          pip install mkdocs mkdocs-material
-
-      - name: Build site
-        run: mkdocs build
-
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./site
-          publish_branch: gh-pages

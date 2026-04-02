@@ -1,0 +1,39 @@
+{
+  "version": "0.2",
+  "language": "en,ru",
+  "words": [
+    "mkdocs",
+    "openapi",
+    "swagger",
+    "doxygen",
+    "plantuml",
+    "oauth",
+    "api",
+    "json",
+    "yaml",
+    "github",
+    "ci",
+    "cd",
+    "axios",
+    "fastapi",
+    "flask",
+    "jsdoc",
+    "pydoc",
+    "sphinx",
+    "antora",
+    "asciidoc",
+    "spectral",
+    "mike",
+    "commitlint"
+  ],
+  "ignorePaths": [
+    "node_modules",
+    "site",
+    "build",
+    ".git",
+    "*.png",
+    "*.jpg",
+    "*.ico",
+    "*.lock"
+  ]
+}
