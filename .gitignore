@@ -1,0 +1,3 @@
+docs-quality-metrics.json
+*.pyc
+__pycache__/

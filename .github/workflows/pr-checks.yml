@@ -27,7 +27,36 @@ jobs:
         run: |
           pip install mkdocs mkdocs-material
 
-      - name: Install Node.js tools
+      - name: Collect documentation metrics
+  run: |
+    pip install docstr-coverage
+    python scripts/collect_metrics.py
+
+- name: Comment metrics on PR
+  uses: actions/github-script@v7
+  with:
+    script: |
+      const fs = require('fs');
+      const metrics = JSON.parse(fs.readFileSync('docs-quality-metrics.json', 'utf8'));
+      const comment = `## Метрики качества документации
+      
+      | Показатель | Значение |
+      |------------|----------|
+      | Markdown страниц | ${metrics.md_pages} |
+      | AsciiDoc страниц | ${metrics.adoc_pages} |
+      | TODO в коде | ${metrics.todo_count} |
+      | FIXME в коде | ${metrics.fixme_count} |
+      | Покрытие комментариями | ${metrics.code_metrics.comment_percentage}% |
+      
+      *Отчет сгенерирован ${metrics.timestamp}*`;
+      
+      github.rest.issues.createComment({
+        issue_number: context.issue.number,
+        owner: context.repo.owner,
+        repo: context.repo.repo,
+        body: comment
+      });
+- name: Install Node.js tools
         run: |
           npm install -g markdownlint-cli
           npm install -g markdown-link-check
