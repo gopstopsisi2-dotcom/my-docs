@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Интерактивный пример: API погоды</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        input, button {
+            padding: 10px;
+            font-size: 16px;
+            margin: 5px;
+        }
+        input {
+            width: 200px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #result {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            font-family: monospace;
+            white-space: pre-wrap;
+        }
+        .error {
+            color: red;
+        }
+        .loading {
+            color: #666;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h3>Проверка погоды</h3>
+        <p>Введите название города и нажмите "Получить погоду"</p>
+        
+        <input type="text" id="city" placeholder="Например: Moscow" value="Moscow">
+        <button onclick="getWeather()">Получить погоду</button>
+        
+        <div id="result"></div>
+    </div>
+
+    <script>
+        // Тестовый API ключ OpenWeatherMap (ограниченный)
+        const API_KEY = "bd5e378503939ddaee76f12ad7a97608";
+        
+        async function getWeather() {
+            const city = document.getElementById('city').value.trim();
+            const resultDiv = document.getElementById('result');
+            
+            if (!city) {
+                resultDiv.innerHTML = '<span class="error">Пожалуйста, введите название города</span>';
+                return;
+            }
+            
+            resultDiv.innerHTML = '<span class="loading">Загрузка...</span>';
+            
+            try {
+                const url = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(city)}&appid=${API_KEY}&units=metric&lang=ru`;
+                const response = await fetch(url);
+                
+                if (!response.ok) {
+                    throw new Error(`Город "${city}" не найден`);
+                }
+                
+                const data = await response.json();
+                
+                // Форматируем вывод
+                const weatherHtml = `
+                    <strong>${data.name}, ${data.sys.country}</strong><br>
+                    🌡️ Температура: ${Math.round(data.main.temp)}°C<br>
+                    💨 Ощущается как: ${Math.round(data.main.feels_like)}°C<br>
+                    ☁️ ${data.weather[0].description}<br>
+                    💧 Влажность: ${data.main.humidity}%<br>
+                    🌬️ Ветер: ${data.wind.speed} м/с
+                `;
+                resultDiv.innerHTML = weatherHtml;
+                
+            } catch (error) {
+                resultDiv.innerHTML = `<span class="error">Ошибка: ${error.message}</span>`;
+            }
+        }
+        
+        // Автоматическая загрузка при открытии страницы
+        window.onload = function() {
+            getWeather();
+        };
+    </script>
+</body>
+</html>

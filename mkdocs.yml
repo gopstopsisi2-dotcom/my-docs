@@ -9,3 +9,9 @@ extra:
   version:
     provider: mike
     default: v1.0.0
+extra_javascript:
+  - interactive/weather-demo.html
+
+plugins:
+  - search
+  - include-markdown
