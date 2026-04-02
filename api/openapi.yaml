@@ -74,6 +74,24 @@ paths:
       tags:
         - Tasks
       responses:
+get:
+  summary: Получить список всех задач
+  responses:
+    '200':
+      description: Успешный ответ. Список задач.
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/Task'
+          example:
+            - id: 1
+              title: "Купить молоко"
+              completed: false
+            - id: 2
+              title: "Сделать домашнее задание"
+              completed: true
         '200':
           description: Успешный ответ. Список задач.
           content:

@@ -2,6 +2,7 @@ site_name: Weather Service Documentation
 theme: material
 
 nav:
+  - Swagger UI: swagger-ui.md
   - Getting Started: index.md
   - API Reference: api-reference.md
   - CLI Tool: cli-tool.md

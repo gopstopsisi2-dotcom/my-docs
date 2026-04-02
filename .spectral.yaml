@@ -1,0 +1,72 @@
+extends: spectral:oas
+rules:
+  # Обязательное наличие description для каждого эндпоинта
+  operation-description-required:
+    description: Каждый эндпоинт должен иметь описание (description)
+    given: "$.paths.*[get,post,put,delete,patch]"
+    then:
+      field: description
+      function: truthy
+    severity: error
+    message: "Операция должна содержать поле description"
+
+  # Обязательное наличие example для response 200
+  response-200-example-required:
+    description: Ответ 200 должен содержать пример (example)
+    given: "$.paths.*[get,post,put,delete,patch].responses.200.content.application/json"
+    then:
+      field: example
+      function: truthy
+    severity: warning
+    message: "Response 200 должен содержать example"
+
+  # Обязательное наличие example для response 201
+  response-201-example-required:
+    description: Ответ 201 должен содержать пример (example)
+    given: "$.paths.*[get,post,put,delete,patch].responses.201.content.application/json"
+    then:
+      field: example
+      function: truthy
+    severity: warning
+    message: "Response 201 должен содержать example"
+
+  # Запрет на использование $ref для схем (если политика команды)
+  no-schema-refs:
+    description: Запрещено использование $ref для схем
+    given: "$.components.schemas.*"
+    then:
+      field: "$ref"
+      function: undefined
+    severity: off
+    message: "Использование $ref для схем запрещено политикой команды"
+
+  # Проверка что все параметры имеют description
+  parameter-description-required:
+    description: Каждый параметр должен иметь описание
+    given: "$.paths.*.*.parameters.*"
+    then:
+      field: description
+      function: truthy
+    severity: error
+    message: "Параметр должен содержать поле description"
+
+  # Проверка что у схемы есть пример
+  schema-example-required:
+    description: Схема должна содержать пример (example)
+    given: "$.components.schemas.*"
+    then:
+      field: example
+      function: truthy
+    severity: warning
+    message: "Схема должна содержать поле example"
+
+  # Проверка что теги используют camelCase
+  tags-camel-case:
+    description: Теги должны быть в camelCase
+    given: "$.tags[*].name"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[a-z]+([A-Z][a-z]+)*$"
+    severity: info
+    message: "Теги должны быть в camelCase"
