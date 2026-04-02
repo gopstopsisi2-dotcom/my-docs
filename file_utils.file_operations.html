@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Python: module file_utils.file_operations</title>
+</head><body>
+
+<table class="heading">
+<tr class="heading-text decor">
+<td class="title">&nbsp;<br><strong class="title"><a href="file_utils.html" class="white">file_utils</a>.file_operations</strong></td>
+<td class="extra"><a href=".">index</a><br><a href="file:c%3A%5Cusers%5C%D0%B0%D0%BB%D0%B5%D0%BA%D1%81%D0%B5%D0%B9%5Conedrive%5C%D1%80%D0%B0%D0%B1%D0%BE%D1%87%D0%B8%D0%B9%20%D1%81%D1%82%D0%BE%D0%BB%5Cmy-docs%5Cfile_utils%5Cfile_operations.py">c:\users\алексей\onedrive\рабочий стол\my-docs\file_utils\file_operations.py</a></td></tr></table>
+    <p><span class="code">Модуль&nbsp;для&nbsp;работы&nbsp;с&nbsp;файлами.<br>
+&nbsp;<br>
+Предоставляет&nbsp;функции&nbsp;для&nbsp;чтения,&nbsp;записи&nbsp;и&nbsp;получения&nbsp;информации&nbsp;о&nbsp;файлах.</span></p>
+<p>
+<table class="section">
+<tr class="decor pkg-content-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Modules</strong></td></tr>
+    
+<tr><td class="decor pkg-content-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><table><tr><td class="multicolumn"><a href="hashlib.html">hashlib</a><br>
+</td><td class="multicolumn"><a href="os.html">os</a><br>
+</td><td class="multicolumn"></td><td class="multicolumn"></td></tr></table></td></tr></table><p>
+<table class="section">
+<tr class="decor functions-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Functions</strong></td></tr>
+    
+<tr><td class="decor functions-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><dl><dt><a name="-append_to_file"><strong>append_to_file</strong></a>(filepath: str, content: str, encoding: str = 'utf-8') -&gt; int</dt><dd><span class="code">Добавляет&nbsp;содержимое&nbsp;в&nbsp;конец&nbsp;файла.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;filepath&nbsp;(str):&nbsp;Путь&nbsp;к&nbsp;файлу.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;content&nbsp;(str):&nbsp;Содержимое&nbsp;для&nbsp;добавления.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;encoding&nbsp;(str,&nbsp;optional):&nbsp;Кодировка&nbsp;файла.&nbsp;По&nbsp;умолчанию&nbsp;'utf-8'.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;int:&nbsp;Количество&nbsp;записанных&nbsp;байт.<br>
+&nbsp;<br>
+Raises:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;FileNotFoundError:&nbsp;Если&nbsp;файл&nbsp;не&nbsp;существует.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;PermissionError:&nbsp;Если&nbsp;нет&nbsp;прав&nbsp;на&nbsp;запись&nbsp;в&nbsp;файл.<br>
+&nbsp;<br>
+Example:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;<a href="#-append_to_file">append_to_file</a>('log.txt',&nbsp;'Новая&nbsp;запись')<br>
+&nbsp;&nbsp;&nbsp;&nbsp;24</span></dd></dl>
+ <dl><dt><a name="-get_file_info"><strong>get_file_info</strong></a>(filepath: str) -&gt; dict</dt><dd><span class="code">Возвращает&nbsp;информацию&nbsp;о&nbsp;файле.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;filepath&nbsp;(str):&nbsp;Путь&nbsp;к&nbsp;файлу.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;dict:&nbsp;Словарь&nbsp;с&nbsp;информацией&nbsp;о&nbsp;файле,&nbsp;содержащий&nbsp;ключи:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;'name':&nbsp;имя&nbsp;файла<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;'size':&nbsp;размер&nbsp;в&nbsp;байтах<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;'created':&nbsp;дата&nbsp;создания<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;'modified':&nbsp;дата&nbsp;последнего&nbsp;изменения<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;'hash_md5':&nbsp;MD5&nbsp;хеш&nbsp;содержимого<br>
+&nbsp;<br>
+Raises:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;FileNotFoundError:&nbsp;Если&nbsp;файл&nbsp;не&nbsp;существует.<br>
+&nbsp;<br>
+Example:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;info&nbsp;=&nbsp;<a href="#-get_file_info">get_file_info</a>('config.txt')<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;print(info['name'])<br>
+&nbsp;&nbsp;&nbsp;&nbsp;'config.txt'</span></dd></dl>
+ <dl><dt><a name="-get_file_size"><strong>get_file_size</strong></a>(filepath: str) -&gt; int</dt><dd><span class="code">Возвращает&nbsp;размер&nbsp;файла&nbsp;в&nbsp;байтах.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;filepath&nbsp;(str):&nbsp;Путь&nbsp;к&nbsp;файлу.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;int:&nbsp;Размер&nbsp;файла&nbsp;в&nbsp;байтах.<br>
+&nbsp;<br>
+Deprecated:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Используйте&nbsp;<a href="#-get_file_info">get_file_info</a>()&nbsp;вместо&nbsp;этой&nbsp;функции.&nbsp;Эта&nbsp;функция&nbsp;будет&nbsp;удалена&nbsp;в&nbsp;версии&nbsp;2.0.0.</span></dd></dl>
+ <dl><dt><a name="-read_file"><strong>read_file</strong></a>(filepath: str, encoding: str = 'utf-8') -&gt; str</dt><dd><span class="code">Читает&nbsp;содержимое&nbsp;файла&nbsp;и&nbsp;возвращает&nbsp;его&nbsp;в&nbsp;виде&nbsp;строки.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;filepath&nbsp;(str):&nbsp;Путь&nbsp;к&nbsp;файлу.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;encoding&nbsp;(str,&nbsp;optional):&nbsp;Кодировка&nbsp;файла.&nbsp;По&nbsp;умолчанию&nbsp;'utf-8'.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;str:&nbsp;Содержимое&nbsp;файла.<br>
+&nbsp;<br>
+Raises:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;FileNotFoundError:&nbsp;Если&nbsp;файл&nbsp;не&nbsp;существует.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;PermissionError:&nbsp;Если&nbsp;нет&nbsp;прав&nbsp;на&nbsp;чтение&nbsp;файла.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;UnicodeDecodeError:&nbsp;Если&nbsp;не&nbsp;удалось&nbsp;декодировать&nbsp;файл&nbsp;указанной&nbsp;кодировкой.<br>
+&nbsp;<br>
+Example:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;content&nbsp;=&nbsp;<a href="#-read_file">read_file</a>('config.txt',&nbsp;'utf-8')<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;print(content[:50])<br>
+&nbsp;&nbsp;&nbsp;&nbsp;'server=localhost'</span></dd></dl>
+ <dl><dt><a name="-write_file"><strong>write_file</strong></a>(filepath: str, content: str, encoding: str = 'utf-8') -&gt; int</dt><dd><span class="code">Записывает&nbsp;содержимое&nbsp;в&nbsp;файл.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;filepath&nbsp;(str):&nbsp;Путь&nbsp;к&nbsp;файлу.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;content&nbsp;(str):&nbsp;Содержимое&nbsp;для&nbsp;записи.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;encoding&nbsp;(str,&nbsp;optional):&nbsp;Кодировка&nbsp;файла.&nbsp;По&nbsp;умолчанию&nbsp;'utf-8'.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;int:&nbsp;Количество&nbsp;записанных&nbsp;байт.<br>
+&nbsp;<br>
+Raises:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;PermissionError:&nbsp;Если&nbsp;нет&nbsp;прав&nbsp;на&nbsp;запись&nbsp;в&nbsp;файл.<br>
+&nbsp;<br>
+Example:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;bytes_written&nbsp;=&nbsp;<a href="#-write_file">write_file</a>('output.txt',&nbsp;'Hello&nbsp;World')<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;print(bytes_written)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;11</span></dd></dl>
+</td></tr></table><p>
+<table class="section">
+<tr class="decor data-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Data</strong></td></tr>
+    
+<tr><td class="decor data-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><strong>Optional</strong> = typing.Optional</td></tr></table>
+</body></html>
