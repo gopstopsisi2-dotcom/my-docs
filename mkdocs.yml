@@ -1,17 +1,65 @@
-site_name: Моя документация
+site_name: Weather Service Documentation
 theme: material
+
 nav:
-  - Главная: index.md
-  - Руководство по установке: installation.md
-  - API Reference: api.md
+  - Getting Started: index.md
+  - API Reference: api-reference.md
+  - CLI Tool: cli-tool.md
+  - Architecture: architecture.md
   - FAQ: faq.md
+  - For Developers: dev-docs.md
+  - Interactive Examples: interactive-examples.md
+
+plugins:
+  - search
+  - i18n:
+      default_language: ru
+      languages:
+        ru:
+          name: Русский
+          build: true
+          nav:
+            - Getting Started: index.md
+            - API Reference: api-reference.md
+            - CLI Tool: cli-tool.md
+            - Architecture: architecture.md
+            - FAQ: faq.md
+            - Для разработчиков: dev-docs.md
+            - Интерактивные примеры: interactive-examples.md
+        en:
+          name: English
+          build: true
+          nav:
+            - Getting Started: index.md
+            - API Reference: api-reference.md
+            - CLI Tool: cli-tool.md
+            - Architecture: architecture.md
+            - FAQ: faq.md
+            - For Developers: dev-docs.md
+            - Interactive Examples: interactive-examples.md
+        zh:
+          name: 中文
+          build: true
+          nav:
+            - Getting Started: index.md
+            - API Reference: api-reference.md
+            - CLI Tool: cli-tool.md
+            - Architecture: architecture.md
+            - FAQ: faq.md
+            - For Developers: dev-docs.md
+            - Interactive Examples: interactive-examples.md
+
 extra:
   version:
     provider: mike
     default: v1.0.0
-extra_javascript:
-  - interactive/weather-demo.html
-
-plugins:
-  - search
-  - include-markdown
+  alternate:
+    - name: Русский
+      link: /
+      lang: ru
+    - name: English
+      link: /en/
+      lang: en
+    - name: 中文
+      link: /zh/
+      lang: zh
