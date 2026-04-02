@@ -1,0 +1,24 @@
+= Модуль авторизации
+== OAuth 2.0
+Описание процесса авторизации через OAuth 2.0.
+
+=== Получение токена
+
+Для получения токена отправьте POST запрос на /oauth/token.
+
+[source,bash]
+----
+curl -X POST https://api.example.com/oauth/token \
+  -d "grant_type=client_credentials" \
+  -d "client_id=your_client_id" \
+  -d "client_secret=your_secret"
+----
+
+=== Использование токена
+
+Добавьте токен в заголовок Authorization:
+
+[source,bash]
+----
+curl -H "Authorization: Bearer your_token" https://api.example.com/user
+----

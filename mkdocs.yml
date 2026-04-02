@@ -1,1 +1,11 @@
-site_name: My Docs
+site_name: Моя документация
+theme: material
+nav:
+  - Главная: index.md
+  - Руководство по установке: installation.md
+  - API Reference: api.md
+  - FAQ: faq.md
+extra:
+  version:
+    provider: mike
+    default: v1.0.0
